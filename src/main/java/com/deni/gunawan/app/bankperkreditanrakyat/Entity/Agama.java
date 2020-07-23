@@ -28,7 +28,7 @@ public class Agama {
     private String id;
     @Column(name = "nama_agama", nullable = false,  length = 50)
     private String nama;
-    @Column(name = "deskripsi_agama")
+    @Column(name = "deskripsi_agama", nullable = false)
     private String deskripsi;
     @Column(name = "created_date")
     private Timestamp createdDate;

@@ -49,35 +49,44 @@ class ApplicationTests extends TestCase {
 	public void testAgama(){
 
 			Agama islam = new Agama("Hindu","Budha","Agama Orang hindu", Timestamp.valueOf(LocalDateTime.now()), "Deni Gunawan");
-			agamaRepository.save(islam);
+//			agamaRepository.save(islam);
 //
-			Agama kepercayaan = new Agama("kepercayaan","agamanya kepercayaan", "agamanya kepercayaan",Timestamp.valueOf(LocalDateTime.now()), "deni");
-			agamaRepository.save(kepercayaan);
+//			Agama kepercayaan = new Agama("kepercayaan","agamanya kepercayaan", "agamanya kepercayaan",Timestamp.valueOf(LocalDateTime.now()), "deni");
+//			agamaRepository.save(kepercayaan);
 
 			List<Agama> daftarAgama= agamaRepository.findAll();
-		assertEquals(daftarAgama.size(), 6);
+			assertEquals(daftarAgama.size(), 8);
 
-		// method mencari nama by nama
-		islam = agamaRepository.findByNama("ISLAM");
-		assertNotNull(islam);
+			// method mencari nama by nama
+			islam = agamaRepository.findByNama("ISLAM");
+			assertNotNull(islam);
 
-		List<Agama> findNamaByDesk = agamaRepository.findByNamaOrDeskripsi("protestan ","semua berawal dari  islam ");
-		assertNotNull(findNamaByDesk);
-//
-//		Agama islam2 = new Agama();
-//
-//		islam2.setId(islam.getId());
-//		islam2.setNama("ISIS");
-//		agamaRepository.save(islam2);
-//		islam2 = agamaRepository.findByNama("ISIS");
-//
-//		assertNull(islam2);
+
+			List<Agama> findNamaByDesk = agamaRepository.findByNamaOrDeskripsi("protestan ","semua berawal dari  islam ");
+			assertNotNull(findNamaByDesk);
+
+			// update nama
+			Agama islam2 = new Agama();
+			islam2.setId(islam.getId());
+			islam2.setNama(islam.getNama());
+			islam2.setDeskripsi(islam.getDeskripsi());
+			islam2.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
+			islam2.setId("ISIS");
+			islam2.setNama("Muslimin");
+			islam2.setDeskripsi("Tentang agama");
+			agamaRepository.save(islam2);
+			islam2 = agamaRepository.findByNama(islam.getId());
+
+
+
+
 		// method mencari by nama dan deksripsi
 ////		Method delete
 //		agamaRepository.deleteAll(daftarAgama);
 //		daftarAgama = agamaRepository.findAll();
 //		assertEquals(daftarAgama.size(), 0);
-			}
+
+	}
 
 
 

@@ -1,7 +1,7 @@
 create table master_agama(
 kode_agama CHARACTER VARYING(50) not null unique primary key,
 nama_agama CHARACTER VARYING(50) not null,
-deskripsi_agama CHARACTER VARYING(100),
+deskripsi_agama CHARACTER VARYING(255) not null,
 created_date TIMESTAMP,
 created_by CHARACTER VARYING(50)
 );
