@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface PendidikanRepository extends CrudRepository<Pendidikan, String> {
-    List<Pendidikan> findAll();
+ public   List<Pendidikan> findAll();
 
 }

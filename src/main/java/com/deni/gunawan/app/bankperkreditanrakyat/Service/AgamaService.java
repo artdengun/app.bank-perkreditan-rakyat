@@ -41,9 +41,19 @@ public class AgamaService {
             this.agamaRepository.deleteById(x);
     }
 
-            // proseur delete all
+            // prosedur delete all
             @Transactional(readOnly = false)
-            public void deletSemuanya(List<Agama> x) {
-            this.agamaRepository.deleteAll(x);
+            public void deletSemuanya(List<Agama> list) {
+            this.agamaRepository.deleteAll(list);
     }
+        @Transactional(readOnly = false)
+        public Agama findByNama(String nama){
+                return this.agamaRepository.findByNama(nama);
+        }
+        @Transactional(readOnly = false)
+        public List<Agama> findByNamaOrDeskripsi(String nama, String deskripsi){
+            return this.agamaRepository.findByNamaOrDeskripsi(nama, deskripsi);
+    }
+
+
 }

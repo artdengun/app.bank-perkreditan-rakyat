@@ -28,10 +28,12 @@ public class Agama {
     private String id;
     @Column(name = "nama_agama", nullable = false,  length = 50)
     private String nama;
-    @Column(name = "deskripsi_agama", nullable = false)
+    @Column(name = "deskripsi_agama")
     private String deskripsi;
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date")
     private Timestamp createdDate;
-    @Column(name = "created_by", nullable = false, length = 50)
+    @Column(name = "created_by", length = 50)
     private String createdBy;
+
+
 }

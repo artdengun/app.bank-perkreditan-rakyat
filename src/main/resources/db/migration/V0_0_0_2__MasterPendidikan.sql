@@ -1,7 +1,7 @@
 create table master_pendidikan(
 kode_pendidikan CHARACTER VARYING(50) not null unique primary key,
 nama_pendidikan CHARACTER VARYING(50) not null unique,
-created_date TIMESTAMP not null,
+created_date TIMESTAMP,
 created_by CHARACTER VARYING(50) not null
 );
 INSERT INTO master_pendidikan(kode_pendidikan, nama_pendidikan, created_date, created_by)
