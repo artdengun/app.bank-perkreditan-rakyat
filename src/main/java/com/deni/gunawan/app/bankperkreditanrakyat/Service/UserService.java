@@ -30,4 +30,5 @@ public class UserService {
     public UserSecurity findByNama(String nama) {
         return this.userRepository.findByNama(nama);
     }
+
 }

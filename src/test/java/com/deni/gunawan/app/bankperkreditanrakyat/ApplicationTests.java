@@ -1,10 +1,7 @@
 package com.deni.gunawan.app.bankperkreditanrakyat;
 
 import com.deni.gunawan.app.bankperkreditanrakyat.Entity.*;
-import com.deni.gunawan.app.bankperkreditanrakyat.Service.AgamaService;
-import com.deni.gunawan.app.bankperkreditanrakyat.Service.PendidikanService;
-import com.deni.gunawan.app.bankperkreditanrakyat.Service.UserService;
-import com.deni.gunawan.app.bankperkreditanrakyat.Service.WilayahService;
+import com.deni.gunawan.app.bankperkreditanrakyat.Service.*;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,6 +29,9 @@ class ApplicationTests extends TestCase {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private NasabahService nasabahService;
 
     @Test
     void contextLoads() {
@@ -61,7 +62,7 @@ class ApplicationTests extends TestCase {
 //        agamaService.save(kepercayaan);
 
         List<Agama> daftarAgama = agamaService.findAll();
-        assertEquals(daftarAgama.size(), 2);
+        assertEquals(daftarAgama.size(), 5);
 
         // method mencari nama by nama
         islam = agamaService.findByNama("protestan");
@@ -104,6 +105,11 @@ class ApplicationTests extends TestCase {
         List<Provinsi> daftarwilayah = wilayahService.findAll();
         assertEquals(daftarwilayah.size(), 2 );
 
+        Provinsi jawaBarat = this.wilayahService.findProvinsiById("001");
+        assertNotNull(jawaBarat);
+        assertEquals(1, jawaBarat.getListKota().size());
+
+
         List<KotaKabupaten> daftarkota = wilayahService.findAllKota();
         assertEquals(daftarkota.size(), 2);
 
@@ -130,6 +136,29 @@ class ApplicationTests extends TestCase {
 
     }
 
+    @Test
+    public  void testSimpanNasabah(){
+        NasabahPerorangan  dimas = new NasabahPerorangan();
+        dimas.setJenisKelamin("L");
+        dimas.setNamaLengkap("Deni Gunawan");
+        dimas.setNomorIdentitas("625484664646");
+        dimas.setAlamat("Jl. Child Casavva ");
+        dimas =  this.nasabahService.save(dimas);
 
+        dimas = this.nasabahService.findByPeroranganId(dimas.getId());
+        assertNotNull(dimas);
+        Nasabah badan = this.nasabahService.findPeroranganPerById(dimas.getId());
+        assertNull(badan);
+    //    this.nasabahService.delete(dimas);
+
+        NasabahBadanUsaha ptdeni = new NasabahBadanUsaha();
+        ptdeni.setNamaLengkap("PT yang penting ngopi");
+        ptdeni.setNomorNpwp("65652626");
+        ptdeni.setAlamat("JL. WKWKW AYEE");
+        ptdeni = this.nasabahService.save(ptdeni);
+        assertNotNull(ptdeni.getId());
+//        this.nasabahService.delete(ptdeni);
+
+    }
 
 }

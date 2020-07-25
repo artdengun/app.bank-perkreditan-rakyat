@@ -3,11 +3,13 @@ package com.deni.gunawan.app.bankperkreditanrakyat.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -15,6 +17,7 @@ import java.sql.Timestamp;
 @Table(name = "master_provinsi")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "listKota")
 public class Provinsi {
 
     @Id
@@ -29,5 +32,7 @@ public class Provinsi {
     private Timestamp createdDate;
     @Column(name = "created_by", nullable = false, length = 20)
     private String createdBy;
+    @OneToMany(mappedBy = "provinsi")
+    private List<KotaKabupaten> listKota = new ArrayList<>();
 
 }
