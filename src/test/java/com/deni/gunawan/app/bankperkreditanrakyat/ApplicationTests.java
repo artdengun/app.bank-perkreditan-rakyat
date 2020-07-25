@@ -1,11 +1,9 @@
 package com.deni.gunawan.app.bankperkreditanrakyat;
 
-import com.deni.gunawan.app.bankperkreditanrakyat.Entity.Agama;
-import com.deni.gunawan.app.bankperkreditanrakyat.Entity.KotaKabupaten;
-import com.deni.gunawan.app.bankperkreditanrakyat.Entity.Pendidikan;
-import com.deni.gunawan.app.bankperkreditanrakyat.Entity.Provinsi;
+import com.deni.gunawan.app.bankperkreditanrakyat.Entity.*;
 import com.deni.gunawan.app.bankperkreditanrakyat.Service.AgamaService;
 import com.deni.gunawan.app.bankperkreditanrakyat.Service.PendidikanService;
+import com.deni.gunawan.app.bankperkreditanrakyat.Service.UserService;
 import com.deni.gunawan.app.bankperkreditanrakyat.Service.WilayahService;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
@@ -30,6 +28,9 @@ class ApplicationTests extends TestCase {
 
     @Autowired
     private WilayahService wilayahService;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     void contextLoads() {
@@ -110,6 +111,25 @@ class ApplicationTests extends TestCase {
             System.out.println(k.toString());
         });
     }
+
+    @Test
+    public void testUserSecurity(){
+        List<RoleSecurity> listRole = this.userService.listRole();
+        assertEquals(2,listRole.size() );
+
+        List<UserSecurity> users = this.userService.findUser();
+        assertEquals(2,users.size());
+
+        UserSecurity admin = this.userService.findByNama("admin");
+        assertNotNull(admin);
+        assertEquals(2, admin.getListRole().size());
+
+        UserSecurity dimas = this.userService.findByNama("dimas");
+        assertNotNull(dimas);
+        assertEquals(1, dimas.getListRole().size());
+
+    }
+
 
 
 }
