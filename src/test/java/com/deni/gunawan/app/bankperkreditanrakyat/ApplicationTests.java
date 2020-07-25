@@ -1,10 +1,12 @@
 package com.deni.gunawan.app.bankperkreditanrakyat;
 
 import com.deni.gunawan.app.bankperkreditanrakyat.Entity.Agama;
+import com.deni.gunawan.app.bankperkreditanrakyat.Entity.KotaKabupaten;
 import com.deni.gunawan.app.bankperkreditanrakyat.Entity.Pendidikan;
-import com.deni.gunawan.app.bankperkreditanrakyat.Repository.AgamaRepository;
-import com.deni.gunawan.app.bankperkreditanrakyat.Repository.PendidikanRepository;
-
+import com.deni.gunawan.app.bankperkreditanrakyat.Entity.Provinsi;
+import com.deni.gunawan.app.bankperkreditanrakyat.Service.AgamaService;
+import com.deni.gunawan.app.bankperkreditanrakyat.Service.PendidikanService;
+import com.deni.gunawan.app.bankperkreditanrakyat.Service.WilayahService;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,74 +22,94 @@ import java.util.List;
 @SpringBootTest
 class ApplicationTests extends TestCase {
 
-		@Autowired
-		private PendidikanRepository pendidikanRepository;
+    @Autowired
+    private PendidikanService pendidikanService;
 
-		@Autowired
-		private AgamaRepository agamaRepository;
+    @Autowired
+    private AgamaService agamaService;
 
-	@Test
-	void contextLoads() {
-	}
+    @Autowired
+    private WilayahService wilayahService;
 
-	@Test
-	public  void TestPendidikan(){
+    @Test
+    void contextLoads() {
+    }
 
-		Pendidikan paketA = new Pendidikan("PAKET A","Sekolah Dasar","Karna Semangat Belajar",Timestamp.valueOf(LocalDateTime.now()), "deni");
-		pendidikanRepository.save(paketA);
-		Pendidikan paketB = new Pendidikan("PAKET B","SMP","Karna Semangat Belajar",Timestamp.valueOf(LocalDateTime.now()), "admin");
-		pendidikanRepository.save(paketB);
-		Pendidikan paketC = new Pendidikan("PAKET C","SMA","Karna Semangat Belajar",Timestamp.valueOf(LocalDateTime.now()), "admin");
-		pendidikanRepository.save(paketC);
-		Pendidikan paketD = new Pendidikan("PAKET D","Strata satu","Karna Semangat Belajar",Timestamp.valueOf(LocalDateTime.now()), "admin");
-		pendidikanRepository.save(paketD);
-		List<Pendidikan> daftarPendidikan = pendidikanRepository.findAll();
-		assertEquals(daftarPendidikan.size(), 11);
-	}
+    @Test
+    public void TestPendidikan() {
 
-	@Test
-	public void testAgama(){
+        Pendidikan paketA = new Pendidikan("PAKET A", "Sekolah Dasar", "Karna Semangat Belajar", Timestamp.valueOf(LocalDateTime.now()), "deni");
+//        pendidikanService.save(paketA);
+        Pendidikan paketB = new Pendidikan("PAKET B", "SMP", "Karna Semangat Belajar", Timestamp.valueOf(LocalDateTime.now()), "admin");
+//        pendidikanService.save(paketB);
+        Pendidikan paketC = new Pendidikan("PAKET C", "SMA", "Karna Semangat Belajar", Timestamp.valueOf(LocalDateTime.now()), "admin");
+//        pendidikanService.save(paketC);
+        Pendidikan paketD = new Pendidikan("PAKET D", "Strata satu", "Karna Semangat Belajar", Timestamp.valueOf(LocalDateTime.now()), "admin");
+//        pendidikanService.save(paketD);
+        List<Pendidikan> daftarPendidikan = pendidikanService.findAll();
+        assertEquals(daftarPendidikan.size(), 7);
+    }
 
-			Agama islam = new Agama("Hindu","Budha","Agama Orang hindu", Timestamp.valueOf(LocalDateTime.now()), "Deni Gunawan");
-//			agamaRepository.save(islam);
+    @Test
+    public void testAgama() {
+
+        Agama islam = new Agama("Muslim", "protestan", "Agama Orang islam", Timestamp.valueOf(LocalDateTime.now()), "Deni Gunawan");
+//        agamaService.save(islam);
+
+        Agama kepercayaan = new Agama("kepercayaan", "agamanya kepercayaan", "agamanya kepercayaan", Timestamp.valueOf(LocalDateTime.now()), "deni");
+//        agamaService.save(kepercayaan);
+
+        List<Agama> daftarAgama = agamaService.findAll();
+        assertEquals(daftarAgama.size(), 2);
+
+        // method mencari nama by nama
+        islam = agamaService.findByNama("protestan");
+        assertNotNull(islam);
+
+
+        List<Agama> findNamaByDesk = agamaService.findByNamaOrDeskripsi("protestan ", "semua berawal dari  islam ");
+        assertNotNull(findNamaByDesk);
+
+        // update nama
+        Agama islam2 = new Agama();
+        islam2.setId(islam.getId());
+        islam2.setNama(islam.getNama());
+        islam2.setDeskripsi(islam.getDeskripsi());
+        islam2.setId("ISIS");
+        islam2.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
+        islam2.setNama("islam");
+        islam2.setDeskripsi("Tentang agama");
+
+        agamaService.save(islam2);
+
 //
-//			Agama kepercayaan = new Agama("kepercayaan","agamanya kepercayaan", "agamanya kepercayaan",Timestamp.valueOf(LocalDateTime.now()), "deni");
-//			agamaRepository.save(kepercayaan);
+//        agamaService.updateById(kepercayaan.getId(), "robi", " data berubah");
+//        assertEquals(kepercayaan.getDeskripsi(), "data berubah");
+//        assertEquals(kepercayaan.getNama(), "robi");
+//
+//        agamaService.deleteByName("%i%");
 
-			List<Agama> daftarAgama= agamaRepository.findAll();
-			assertEquals(daftarAgama.size(), 8);
-
-			// method mencari nama by nama
-			islam = agamaRepository.findByNama("ISLAM");
-			assertNotNull(islam);
-
-
-			List<Agama> findNamaByDesk = agamaRepository.findByNamaOrDeskripsi("protestan ","semua berawal dari  islam ");
-			assertNotNull(findNamaByDesk);
-
-			// update nama
-			Agama islam2 = new Agama();
-			islam2.setId(islam.getId());
-			islam2.setNama(islam.getNama());
-			islam2.setDeskripsi(islam.getDeskripsi());
-			islam2.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
-			islam2.setId("ISIS");
-			islam2.setNama("Muslimin");
-			islam2.setDeskripsi("Tentang agama");
-			agamaRepository.save(islam2);
-			islam2 = agamaRepository.findByNama(islam.getId());
-
-
-
-
-		// method mencari by nama dan deksripsi
+        // method mencari by nama dan deksripsi
 ////		Method delete
 //		agamaRepository.deleteAll(daftarAgama);
 //		daftarAgama = agamaRepository.findAll();
 //		assertEquals(daftarAgama.size(), 0);
 
-	}
+    }
 
+
+    @Test
+    public void testKOtaKab(){
+        List<Provinsi> daftarwilayah = wilayahService.findAll();
+        assertEquals(daftarwilayah.size(), 2 );
+
+        List<KotaKabupaten> daftarkota = wilayahService.findAllKota();
+        assertEquals(daftarkota.size(), 2);
+
+        daftarwilayah.forEach((k) -> {
+            System.out.println(k.toString());
+        });
+    }
 
 
 }

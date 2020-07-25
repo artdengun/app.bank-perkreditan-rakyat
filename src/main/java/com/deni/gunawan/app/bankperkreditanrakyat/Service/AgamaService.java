@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,9 +20,7 @@ public class AgamaService {
         return agamaRepository.save(x);
     }
     // function yang harus ada return
-    public Optional<Agama> findById(String id){
-        return agamaRepository.findById(id);
-    }
+
             // function ang harus ada return
             // kita buat perintah untuk mencari list
     public List<Agama> findAll(){
@@ -42,18 +39,31 @@ public class AgamaService {
     }
 
             // prosedur delete all
-            @Transactional(readOnly = false)
+            @Transactional
             public void deletSemuanya(List<Agama> list) {
             this.agamaRepository.deleteAll(list);
     }
-        @Transactional(readOnly = false)
+        @Transactional
         public Agama findByNama(String nama){
                 return this.agamaRepository.findByNama(nama);
         }
-        @Transactional(readOnly = false)
+
+        @Transactional
         public List<Agama> findByNamaOrDeskripsi(String nama, String deskripsi){
-            return this.agamaRepository.findByNamaOrDeskripsi(nama, deskripsi);
+            return this.agamaRepository.findByNamaOrDeskripsi(nama, deskripsi); }
+
+        @Transactional
+        public void updateById(String nama, String deskripsi, String id){
+            this.agamaRepository.updateNamaAndDescription(id,nama,deskripsi);
+        }
+
+        @Transactional
+        public void deleteByName(String name){
+            this.agamaRepository.findByNama(name);
+        }
+
+        @Transactional
+    public Iterable<Agama> findAllById(String id) {
+            return this.agamaRepository.findAllById(id);
     }
-
-
 }

@@ -1,6 +1,6 @@
 create table master_pendidikan(
 kode_pendidikan CHARACTER VARYING(50) not null unique primary key,
-nama_pendidikan CHARACTER VARYING(50) not null unique,
+nama_pendidikan CHARACTER VARYING(50) not null,
 created_date TIMESTAMP,
 created_by CHARACTER VARYING(50) not null
 );

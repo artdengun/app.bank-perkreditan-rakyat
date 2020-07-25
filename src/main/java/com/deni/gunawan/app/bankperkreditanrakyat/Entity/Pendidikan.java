@@ -17,12 +17,12 @@ import java.sql.Timestamp;
 public class Pendidikan {
 
     @Id
-    @GenericGenerator(name = "pendidikan_id" , strategy = "uuid2")
-    @GeneratedValue(generator = "pendidikan_id")
+    @GenericGenerator(name = "uuid_pendidikan" , strategy = "uuid2")
+    @GeneratedValue(generator = "uuid_pendidikan")
 
     @Column(name = "kode_pendidikan", nullable = false, unique = true, length = 50)
     private String id;
-    @Column(name = "nama_pendidikan", nullable = false, unique = true, length = 50)
+    @Column(name = "nama_pendidikan", nullable = false, length = 50)
     private String nama;
     @Column(name = "deskripsi_pendidikan")
     private String deksripsi;
