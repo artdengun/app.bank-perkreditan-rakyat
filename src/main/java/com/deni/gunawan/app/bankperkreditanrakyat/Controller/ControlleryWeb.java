@@ -10,6 +10,8 @@ public class ControlleryWeb {
 
     @GetMapping(value = "/index")
     public String halloController(){
-        return "/hello";
+        return "/index";
     }
+    @GetMapping(value = "/test")
+    public String testController(){ return "/hellotest";}
 }
