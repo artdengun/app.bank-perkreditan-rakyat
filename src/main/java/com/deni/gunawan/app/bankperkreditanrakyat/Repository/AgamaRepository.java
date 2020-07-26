@@ -14,7 +14,6 @@ public interface AgamaRepository extends CrudRepository<Agama, String> {
 
     public Agama findByNama(String namaAgama);
 
-
     public List<Agama> findByNamaOrDeskripsi(String nama, String deskripsi);
 
 

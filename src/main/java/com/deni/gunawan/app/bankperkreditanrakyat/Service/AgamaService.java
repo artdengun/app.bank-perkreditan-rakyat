@@ -24,13 +24,14 @@ public class AgamaService {
         return agamaRepository.findAll();
     }
 
-    @Transactional(readOnly = false)
-    public void delete(Agama x) {
-        this.agamaRepository.delete(x);
+    @Transactional
+   public void deleteAgamaId(String id){
+        this.agamaRepository.deleteById(id);
     }
 
     @Transactional(readOnly = false)
     public void deletById(String x) {
+
         this.agamaRepository.deleteById(x);
     }
 
