@@ -28,6 +28,11 @@ public class AgamaController {
         params.addAttribute("agama", agama);
         return "/pages/agama/form";
     }
+    @GetMapping("/form/{id}")
+    public String formAgamaById(@PathVariable("id") String kodeAgama, ModelMap params){
+        params.addAttribute("agama", agamaService.findPeroranganPerById(kodeAgama));
+        return "/pages/agama/form";
+    }
 
     @PostMapping("/submit")
     public String submitAgama(@ModelAttribute Agama agama){

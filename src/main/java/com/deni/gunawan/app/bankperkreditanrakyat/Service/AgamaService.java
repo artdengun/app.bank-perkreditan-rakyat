@@ -25,7 +25,7 @@ public class AgamaService {
     }
 
     @Transactional
-   public void deleteAgamaId(String id){
+    public void deleteAgamaId(String id) {
         this.agamaRepository.deleteById(id);
     }
 
@@ -61,7 +61,8 @@ public class AgamaService {
     }
 
     @Transactional
-    public Iterable<Agama> findAllById(String id) {
-        return this.agamaRepository.findAllById(id);
+    public Agama findPeroranganPerById(String id) {
+        return this.agamaRepository.findPeroranganPerById(id);
     }
+
 }

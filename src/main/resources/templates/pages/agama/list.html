@@ -30,8 +30,9 @@
             <td th:text="${agama.deskripsi}" class="table-warning">Muslim</td>
             <td th:text="${agama.createdDate}" class="table-warning">2020-07-26 12:03</td>
             <td th:text="${agama.createdBy}" class="table-warning">Deni Gunawan</td>
-            <td class="table-warning">
-                <a href="#" th:href="@{'/agama/hapus/'+${agama.id}}" class="btn btn-outline-primary">Hapus</a>
+            <td>
+                <a href="#" th:href="@{'/agama/hapus/'+${agama.id}}" class="btn btn-outline-danger">Hapus</a>
+                <a href="#" th:href="@{'/agama/form/'+${agama.id}}" class="btn btn-outline-primary">update</a>
             </td>
         </tr>
         </tbody>
