@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Agama</title>
+</head>
+<body>
+<section layout:fragment="content">
+        <h3>Daftar Agama</h3>
+        <hr/>
+    <a href="/agama/form" th:href="@{/agama/form}" class="btn btn-success"/> Tambah Data</a>
+    <table class="table table-striped table-bordered table-hover table-responsive{md}">
+        <thead>
+        <tr>
+            <td>Nomor</td>
+            <td>Nama</td>
+            <td>Keterangan</td>
+            <td>Created Date</td>
+            <td>CreateD By</td>
+            <td>Hapus / edit</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="agama : ${listAgama}">
+            <td th:text="${agama.id}">1</td>
+            <td th:text="${agama.nama}">Islam</td>
+            <td th:text="${agama.deskripsi}">Muslim</td>
+            <td th:text="${agama.createdDate}">2020-07-26 12:03</td>
+            <td th:text="${agama.createdBy}">Deni Gunawan</td>
+            <td>-</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
