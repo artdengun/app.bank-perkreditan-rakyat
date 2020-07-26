@@ -84,18 +84,16 @@ class ApplicationTests extends TestCase {
 
         agamaService.save(islam2);
 
-//
-//        agamaService.updateById(kepercayaan.getId(), "robi", " data berubah");
-//        assertEquals(kepercayaan.getDeskripsi(), "data berubah");
-//        assertEquals(kepercayaan.getNama(), "robi");
-//
-//        agamaService.deleteByName("%i%");
 
-        // method mencari by nama dan deksripsi
-////		Method delete
-//		agamaRepository.deleteAll(daftarAgama);
-//		daftarAgama = agamaRepository.findAll();
-//		assertEquals(daftarAgama.size(), 0);
+        agamaService.updateById(kepercayaan.getId(), "robi", " data berubah");
+        assertEquals(kepercayaan.getDeskripsi(), "data berubah");
+        assertEquals(kepercayaan.getNama(), "robi");
+
+        agamaService.deleteByName("%i%");
+
+        agamaService.deleteAll(daftarAgama);
+		daftarAgama = agamaService.findAll();
+		assertEquals(daftarAgama.size(), 0);
 
     }
 

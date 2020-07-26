@@ -1,0 +1,16 @@
+p {
+   border: 5px solid blue;
+   color: black;
+  }
+  .KambingItem{
+    background: #ff282d;
+    font-size: 16px;
+    font-family: 'DejaVu Sans Mono','monospace';
+  }
+
+#Judul {
+    font-size: 50px;
+    font-family: "Times New Roman";
+    font-style: italic;
+    align-content: center;
+}
