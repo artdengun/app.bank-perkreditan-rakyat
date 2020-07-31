@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Agama</title>
+</head>
+<body>
+<section layout:fragment="content">
+        <h3>Daftar Agama</h3>
+        <hr/>
+        <a href="/agama/form" th:href="@{/agama/form}"  class="btn btn-outline-success"/><span data-feather="users">
+        </span> Tambah Data </a> <br><br>
+    <table class="table table-striped table-bordered  table-hover table-responsive{md}">
+        <thead>
+        <tr>
+            <td class="table-dark">Nomor</td>
+            <td class="table-dark">Nama</td>
+            <td class="table-dark">Keterangan</td>
+            <td class="table-dark">Created Date</td>
+            <td class="table-dark">CreateD By</td>
+            <td class="table-dark">Hapus / edit</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="agama : ${listAgama}" >
+            <td th:text="${agama.id}" class="table-warning">1</td>
+            <td th:text="${agama.nama}" class="table-warning">Islam</td>
+            <td th:text="${agama.deskripsi}" class="table-warning">Muslim</td>
+            <td th:text="${agama.createdDate}" class="table-warning">2020-07-26 12:03</td>
+            <td th:text="${agama.createdBy}" class="table-warning">Deni Gunawan</td>
+            <td>
+                <a href="#" th:href="@{'/agama/hapus/'+${agama.id}}" class="btn btn-outline-danger">Hapus</a>
+                <a href="#" th:href="@{'/agama/form/'+${agama.id}}" class="btn btn-outline-primary">update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
