@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: java
-  replicas: 2 # tells deployment to run 2 pods matching the template
+  replicas: 3 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
@@ -16,7 +16,7 @@ spec:
         - name: app-bpr
           image: artdengun/app-bpr
           ports:
-            - containerPort: 8080
+            - containerPort: 80
 ---
 # https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
 kind: Service
@@ -28,7 +28,7 @@ spec:
     app: java
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
-      nodePort: 31110
+      port: 80
+      targetPort: 80
+      nodePort: 30010
   type: NodePort
